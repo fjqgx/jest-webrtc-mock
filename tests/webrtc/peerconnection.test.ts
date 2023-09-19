@@ -13,7 +13,6 @@ describe("test peerconnection", () => {
 
   test("no rtcpeerconnection", () => {
     mockRTCPeerConnectionClear();
-
     try {
       let pc = new RTCPeerConnection();
     } catch(err) {

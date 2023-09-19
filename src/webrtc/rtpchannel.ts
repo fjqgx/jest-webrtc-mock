@@ -1,6 +1,7 @@
-import { ProcessStatsDataFunction } from "../../types";
+
 import { RTCStatsReport } from "./rtcstatsreport";
 
+export type ProcessStatsDataFunction = (data: RTCStatsReport) => RTCStatsReport;
 
 export class RTPChannel {
 
