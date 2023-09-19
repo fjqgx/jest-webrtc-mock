@@ -1,5 +1,5 @@
-import { mockVideoDecoder } from "./webcodec/videodecoder";
+import { mockRTCPeerConnection, mockRTCPeerConnectionClear } from "./webrtc/peerconnection";
+import { mockMediaStream, mockMediaStreamClear} from "./mediastram/mediastream";
 
-
-export { mockVideoDecoder };
+export { mockMediaStream, mockMediaStreamClear, mockRTCPeerConnection, mockRTCPeerConnectionClear };
 

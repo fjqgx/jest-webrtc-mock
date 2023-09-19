@@ -71,7 +71,7 @@ export class RTCPeerConnection extends EventListener {
 }
 
 /**
- * mock支持RTCPeerConnection
+ * mock RTCPeerConnection
  */
 export function mockRTCPeerConnection(): void {
   Object.defineProperty(window, "RTCPeerConnection", {
@@ -81,11 +81,13 @@ export function mockRTCPeerConnection(): void {
   })
 }
 
+/**
+ * remove mock
+ */
 export function mockRTCPeerConnectionClear(): void {
   Object.defineProperty(window, "RTCPeerConnection", {
-    configurable: false,
-    writable: false,
+    configurable: true,
+    writable: true,
     value: undefined,
-  })
-  
+  }) 
 }

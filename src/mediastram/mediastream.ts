@@ -36,3 +36,37 @@ export class MediaStream {
     }
   }
 }
+
+/**
+ * mock MediaStream and MediaStreamTrack
+ */
+export function mockMediaStream (): void {
+  Object.defineProperty(window, "MediaStreamTrack", {
+    configurable: true,
+    writable: true,
+    value: MediaStreamTrack
+  })
+
+  Object.defineProperty(window, "MediaStream", {
+    configurable: true,
+    writable: true,
+    value: MediaStream,
+  })
+}
+
+/**
+ * remove mock MediaStream and MediaStreamTrack
+ */
+export function mockMediaStreamClear(): void {
+  Object.defineProperty(window, "MediaStreamTrack", {
+    configurable: true,
+    writable: true,
+    value: undefined
+  })
+
+  Object.defineProperty(window, "MediaStream", {
+    configurable: true,
+    writable: true,
+    value: undefined,
+  }) 
+}
