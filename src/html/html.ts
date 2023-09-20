@@ -1,4 +1,6 @@
-class CSSStyleDeclaration {
+import { EventListener } from "../base/event-listener";
+
+export class CSSStyleDeclaration {
 
   protected css_text: string = '';
 
@@ -17,14 +19,14 @@ class CSSStyleDeclaration {
 
 }
 
-export class HTMLElement {
+export class HTMLElement extends EventListener {
 
   protected cssStyle: CSSStyleDeclaration = new CSSStyleDeclaration();
 
   protected parent?: HTMLElement;
 
   constructor () {
-
+    super();
   }
 
   get style(): CSSStyleDeclaration {
@@ -41,13 +43,5 @@ export class HTMLElement {
 
   public appendChild(child: HTMLElement): void {
 
-  }
-
-  public addEventListener(event: string, callback: Function, capture?: boolean): void {
-
-  }
-
-  public removeEventListener(event: string, callback: Function, capture?: boolean): void {
-    
   }
 }

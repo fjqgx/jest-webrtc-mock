@@ -1,6 +1,6 @@
 {
   "name": "jest-webrtc-mock",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "mock webrtc for jest",
   "main": "./dist/jest-webrtc-mock.js",
   "types": "types/index.d.ts",

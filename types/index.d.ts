@@ -1,4 +1,17 @@
 
+
+// mock AudioContext
+export function mockAudioContext(): void;
+
+// remove mock AudioContext
+export function mockAudioContextClear(): void;
+
+// mock createElement(support div、canva、video)
+export function mockHtmlElement(): void;
+
+// remove mock createElement(support div、canva、video)
+export function mockHtmlElementClear(): void;
+
 // mock navigator.mediaDevices
 export function mockMediaDevices(): void;
 
@@ -16,3 +29,11 @@ export function mockRTCPeerConnection(): void;
 
 // remove mock RTCPeerConnection
 export function mockRTCPeerConnectionClear(): void;
+
+
+export declare class RTCPeerConnection {
+
+  public getSenders(): RTCRtpSender[]
+
+  public getReceivers(): RTCRtpReceiver[];
+}

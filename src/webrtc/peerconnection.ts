@@ -59,7 +59,7 @@ export class RTCPeerConnection extends EventListener {
     return []; 
   }
 
-  public getSenders(): RTCRtpReceiver[] {
+  public getSenders(): RTCRtpSender[] {
     return [];
   }
 
