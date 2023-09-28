@@ -2,6 +2,12 @@ import { EventListener } from "../base/event-listener";
 
 export class CSSStyleDeclaration {
 
+  public width: string = '';
+
+  public height: string = '';
+
+  public oncontextmenu?: Function;
+
   protected css_text: string = '';
 
   constructor () {
@@ -21,16 +27,16 @@ export class CSSStyleDeclaration {
 
 export class HTMLElement extends EventListener {
 
-  protected cssStyle: CSSStyleDeclaration = new CSSStyleDeclaration();
+  public style: CSSStyleDeclaration = new CSSStyleDeclaration();
 
   protected parent?: HTMLElement;
 
+  protected childArr: HTMLElement[] = [];
+
+  protected elementType: string = '';
+
   constructor () {
     super();
-  }
-
-  get style(): CSSStyleDeclaration {
-    return this.cssStyle;
   }
 
   set innerText(text: string) {
@@ -40,8 +46,12 @@ export class HTMLElement extends EventListener {
   get parentElement(): HTMLElement | undefined {
     return this.parent;
   }
+  
+  get tagName(): string {
+    return this.elementType;
+  }
 
   public appendChild(child: HTMLElement): void {
-
+    this.childArr.push(child);
   }
 }

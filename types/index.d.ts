@@ -37,3 +37,28 @@ export declare class RTCPeerConnection {
 
   public getReceivers(): RTCRtpReceiver[];
 }
+
+
+/**
+ * HTMLVideoElement
+ */
+export const enum AutoPlayType {
+  AutoPlay = 1,   // auto play 
+  MutePlay,       // auto play with muted
+  PlayNotAllowed, // can not auto play
+}
+
+declare global {
+  interface HTMLVideoElement {
+    /** set autoplay policy */
+    setAutoPlayType(type: AutoPlayType): void;
+
+    setSupportRequestVideoFrameCallback (now: number, mediadata: MockVideoFrameCallbackMetadata, callback: ProcessVideoFrameCallbackMetadata): void;
+  }
+}
+
+export interface MockVideoFrameCallbackMetadata extends VideoFrameCallbackMetadata {
+  delay: number;    // next frame interval(ms)
+}
+
+export type ProcessVideoFrameCallbackMetadata = (mediadata: MockVideoFrameCallbackMetadata) => void;

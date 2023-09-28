@@ -1,16 +1,20 @@
 import { HTMLElement } from "./html";
-import { HTMLVideoElement } from "./html-video-element";
 
 
 export class HTMLDivElement extends HTMLElement {
 
   constructor () {
     super();
+    this.elementType = "DIV";
   }
 
   public querySelector(type: string): HTMLElement | null {
     if ('video' === type) {
-      return new HTMLVideoElement();
+      for (let i = 0; i < this.childArr.length; ++i) {
+        if (this.childArr[i].tagName === "VIDEO") {
+          return this.childArr[i];
+        }
+      }
     }
     return null;
   }

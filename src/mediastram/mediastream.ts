@@ -35,6 +35,17 @@ export class MediaStream {
       return [];
     }
   }
+
+  public getTracks(): MediaStreamTrack[] {
+    let arr: MediaStreamTrack[] = [];
+    if (this.videoTrack) {
+      arr.push(this.videoTrack);
+    }
+    if (this.audioTrack) {
+      arr.push(this.audioTrack);
+    }
+    return arr;
+  }
 }
 
 /**

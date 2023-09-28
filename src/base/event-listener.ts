@@ -30,4 +30,12 @@ export class EventListener {
       }
     }
   }
+
+  public dispatchEvent(event: string, ... args: any[]): void {
+    if (this.eventMap[event]) {
+      for (let i = 0; i < this.eventMap[event].length; ++i) {
+        this.eventMap[event][i].apply(this, args);
+      }
+    }
+  }
 }

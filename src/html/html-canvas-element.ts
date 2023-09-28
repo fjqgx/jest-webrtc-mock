@@ -25,6 +25,7 @@ export class HTMLCanvasElement extends HTMLElement {
   
   constructor() {
     super();
+    this.elementType = "CANVAS";
   }
 
   public getContext(): CanvasRenderingContext2D {
