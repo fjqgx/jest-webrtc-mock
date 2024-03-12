@@ -1,5 +1,5 @@
 
-import { mockRTCPeerConnection, mockRTCPeerConnectionClear } from "../../src/webrtc/peerconnection";
+import { mockRTCPeerConnection, mockRTCPeerConnectionClear, mockRTCPeerConnectionData } from "../../src/webrtc/peerconnection";
 import { RTCPeerConnectionMockDataType } from "../../types";
 
 
@@ -35,17 +35,20 @@ describe("test peerconnection", () => {
 
   test('mock rtcpeerconnection createoffer', () => {
     try {
-      let pc = new RTCPeerConnection();
-      pc.mockData(RTCPeerConnectionMockDataType.Offer, {
+      mockRTCPeerConnectionData(RTCPeerConnectionMockDataType.Offer, {
         type: "offer",
         sdp: "123"
       })
+
+      let pc = new RTCPeerConnection();
+      
       if (pc.createDataChannel === undefined) {
         // 运行到这里就是错误了
         expect(1).toBe(0);
       }
       pc.createOffer().then((offer: RTCSessionDescriptionInit) => {
-
+        expect(offer.type).toBe("offer");
+        expect(offer.sdp).toBe("123");
       })
     } catch (err) {
       // 运行到这里就是错误了

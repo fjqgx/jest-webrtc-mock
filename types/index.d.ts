@@ -1,9 +1,3 @@
-declare global {
-  interface RTCPeerConnection {
-    // 支持Mock RTCPeerConnection返回的数据
-    mockData (type: RTCPeerConnectionMockDataType, data: RTCSessionDescriptionInit): boolean;
-  }
-}
 
 //////////////// RTCPeerConnection ////////////////
 export const enum RTCPeerConnectionMockDataType {
@@ -14,6 +8,8 @@ export const enum RTCPeerConnectionMockDataType {
 export function mockRTCPeerConnection(): void;
 
 export function mockRTCPeerConnectionClear(): void;
+
+export function mockRTCPeerConnectionData(type: RTCPeerConnectionMockDataType, data: RTCSessionDescriptionInit): boolean
 
 
 //////////////// AudioContext ////////////////

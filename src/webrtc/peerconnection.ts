@@ -4,11 +4,7 @@ import { RTCRtpSender } from "./rtpsender";
 import { RTCDataChannel } from "./datachannel";
 import { RTCPeerConnectionMockDataType } from "../../types";
 
-declare global {
-  interface RTCPeerConnection {
-    mockData (type: RTCPeerConnectionMockDataType, data: RTCSessionDescriptionInit): void;
-  }
-}
+
 
 export class RTCPeerConnection extends EventListener {
 
@@ -20,19 +16,14 @@ export class RTCPeerConnection extends EventListener {
 
   protected rtcRtpSenderVideo?: RTCRtpSender;
 
-  private mock_data: PeerconnectionMockData = new PeerconnectionMockData();
 
   constructor (param: any) {
     super();
   }
 
-  public mockData (type: RTCPeerConnectionMockDataType, data: RTCSessionDescriptionInit): boolean {
-    return this.mock_data.mock(type, data);
-  }
-
   public createOffer(): Promise<RTCSessionDescriptionInit> {
     return new Promise((resolve, reject) => {
-      let offer: RTCSessionDescriptionInit | null = this.mock_data.getData(RTCPeerConnectionMockDataType.Offer);
+      let offer: RTCSessionDescriptionInit | null = moc_data.getData(RTCPeerConnectionMockDataType.Offer);
       if (offer) {
         resolve(offer)
       }
@@ -41,7 +32,7 @@ export class RTCPeerConnection extends EventListener {
 
   public createAnswer(): Promise<RTCSessionDescriptionInit> {
     return new Promise((resolve, reject) => {
-      let answer: RTCSessionDescriptionInit | null = this.mock_data.getData(RTCPeerConnectionMockDataType.Answer);
+      let answer: RTCSessionDescriptionInit | null = moc_data.getData(RTCPeerConnectionMockDataType.Answer);
       if (answer) {
         resolve(answer)
       }
@@ -128,7 +119,13 @@ class PeerconnectionMockData {
     }
     return null;
   }
+
+  public reset(): void {
+
+  }
 }
+
+let moc_data: PeerconnectionMockData = new PeerconnectionMockData();
 
 /**
  * mock支持RTCPeerConnection
@@ -141,4 +138,8 @@ export function mockRTCPeerConnection(): void {
 export function mockRTCPeerConnectionClear(): void {
   delete (Window as any).RTCPeerConnection;
   delete (global as any).RTCPeerConnection;
+}
+
+export function mockRTCPeerConnectionData(type: RTCPeerConnectionMockDataType, data: RTCSessionDescriptionInit): boolean {
+  return moc_data.mock(type, data);
 }

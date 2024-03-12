@@ -10,11 +10,15 @@
 //   }
 // }
 
+const originWebAssembly = WebAssembly;
+
 export function mockWebAssembly (): void {
   if (!!WebAssembly) {
     return;
   }
-  // (global as any).WebAssembly = WebAssembly;
+  if (originWebAssembly) {
+    (global as any).WebAssembly = originWebAssembly;
+  }
 }
 
 export function mockWebAssemblyClear(): void {
