@@ -1,8 +1,8 @@
 {
   "name": "jest-webrtc-mock",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "mock webrtc for jest",
-  "main": "./dist/index.js",
+  "main": "./dist/jest-webrtc-mock.js",
   "scripts": {
     "test": "jest",
     "dev": "webpack --mode development --config script/webpack.dev.config.js",
