@@ -6,8 +6,13 @@ export class RTCRtpSender extends RTPChannel {
 
   readonly track?: MediaStreamTrack;
 
-  constructor(type: MediaStreamTrackType) {
+  constructor(type: MediaStreamTrackType | MediaStreamTrack) {
     super();
-    this.track = new MediaStreamTrack(type);
+    if (MediaStreamTrackType.Audio === type || MediaStreamTrackType.Video === type) {
+      this.track = new MediaStreamTrack(type);
+    } else {
+      this.track = type;
+    }
+    
   }
 }

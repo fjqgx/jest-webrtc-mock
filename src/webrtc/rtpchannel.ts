@@ -1,11 +1,7 @@
-// import { ProcessStatsDataFunction } from "../../types";
-import { RTCStatsReport } from "./rtcstatsreport";
 
-type ProcessStatsDataFunction = (data: RTCStatsReport) => RTCStatsReport;
+import { ProcessStatsDataFunction } from "../../types";
 
 export class RTPChannel {
-
-  // protected dataArray?: any[];
 
   protected baseData?: RTCStatsReport;
 
@@ -15,9 +11,14 @@ export class RTPChannel {
     
   }
 
-  set handleStatsData(fun: Function | undefined) {
-    this.handleStatsData = fun;
+  public setProcessStatsDataCallback(report: RTCStatsReport, callback: ProcessStatsDataFunction): void {
+    this.baseData = report;
+    this.handleStatsDataFun = callback;
   }
+
+  // set handleStatsData(fun: Function | undefined) {
+  //   this.handleStatsData = fun;
+  // }
 
   public getStats(): Promise<RTCStatsReport> {
     return new Promise((resolve) => {

@@ -1,18 +1,25 @@
 import { HTMLElement } from "./html";
 
+
 export class HTMLDivElement extends HTMLElement {
 
-  constructor() {
+  constructor () {
     super();
-    this.type = "div";
+    this.elementType = "DIV";
   }
 
-}
+  public querySelector(type: string): HTMLElement | null {
+    if ('video' === type) {
+      for (let i = 0; i < this.childArr.length; ++i) {
+        if (this.childArr[i].tagName === "VIDEO") {
+          return this.childArr[i];
+        }
+      }
+    }
+    return null;
+  }
 
-export function mockHTMLDivElement (): void {
-  (global as any).HTMLDivElement = HTMLDivElement;
-}
-
-export function mockHTMLDivElementClear(): void {
-  delete (global as any).HTMLDivElement;
+  public insertAdjacentHTML (): void {
+    
+  }
 }

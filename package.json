@@ -1,17 +1,17 @@
 {
   "name": "jest-webrtc-mock",
-  "version": "1.0.8-beta.1",
+  "version": "1.0.8",
   "description": "mock webrtc for jest",
   "main": "./dist/jest-webrtc-mock.js",
   "types": "./types/index.d.ts",
   "scripts": {
     "test": "jest",
     "dev": "webpack --mode development --config script/webpack.dev.config.js",
-    "prod": "webpack --mode production --config script/webpack.pro.config.js"
+    "build": "webpack --mode production --config script/webpack.pro.config.js"
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/fjqgx/jest-webrtc-mock"
   },
   "files": [
     "dist",

@@ -12,7 +12,7 @@ export class EventListener {
 
   }
 
-  public addEventListener (event: string, callback: Function): void {
+  public addEventListener (event: string, callback: Function, capture?: boolean): void {
     if (this.eventMap[event]) {
       this.eventMap[event].push(callback);
     } else {
@@ -20,13 +20,21 @@ export class EventListener {
     }
   }
 
-  public removeEventListener (event: string, callback: Function): void {
+  public removeEventListener (event: string, callback: Function, capture?: boolean): void {
     if (this.eventMap[event]) {
       for (let i = 0; i < this.eventMap[event].length; ++i) {
         if (this.eventMap[event][i] === callback) {
           this.eventMap[event].splice(i, 1);
           break;
         }
+      }
+    }
+  }
+
+  public dispatchEvent(event: string, ... args: any[]): void {
+    if (this.eventMap[event]) {
+      for (let i = 0; i < this.eventMap[event].length; ++i) {
+        this.eventMap[event][i].apply(this, args);
       }
     }
   }

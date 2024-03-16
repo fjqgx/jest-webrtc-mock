@@ -2,6 +2,11 @@ import { EventListener } from "../base/event-listener";
 import { RTCRtpReceiver } from "./rtpreceiver";
 import { RTCRtpSender } from "./rtpsender";
 import { RTCDataChannel } from "./datachannel";
+import { RTCRtpTransceiver, TransceiverDirection } from "./rtptransceiver";
+import { MediaStream } from "../mediastram/mediastream";
+import { MediaStreamTrack } from "../mediastram/mediastreamtrack";
+import { MediaStreamTrackType } from "../mediastram/config";
+
 
 export const enum RTCPeerConnectionMockDataType {
   Offer = 1,
@@ -18,9 +23,49 @@ export class RTCPeerConnection extends EventListener {
 
   protected rtcRtpSenderVideo?: RTCRtpSender;
 
+  protected tranceiverArr: RTCRtpTransceiver[] = [];
+
 
   constructor (param: any) {
     super();
+  }
+
+  public addStream (mediastream: MediaStream): void {
+    let tracksArr: MediaStreamTrack[] = mediastream.getTracks();
+    if (tracksArr.length > 0) {
+      let tranceiver: RTCRtpTransceiver = new RTCRtpTransceiver(this.tranceiverArr.length);
+      tranceiver.addStream(mediastream);
+      this.tranceiverArr.push(tranceiver);
+    }
+  }
+
+  public addTrack (): void {
+
+  }
+
+  public addTransceiver (trackOrKind: string | MediaStreamTrack, init?: RTCRtpTransceiverInit | undefined): RTCRtpTransceiver | null {
+    let tranceiver: RTCRtpTransceiver | null = null;
+    if (typeof trackOrKind === 'string') {
+      if (MediaStreamTrackType.Audio === trackOrKind) {
+        if (init && (TransceiverDirection.SendOnly === init.direction || TransceiverDirection.RecvOnly === init.direction || TransceiverDirection.SendRecv === init.direction)) {
+          tranceiver = new RTCRtpTransceiver(this.tranceiverArr.length);
+        }
+        
+        
+      } else if (MediaStreamTrackType.Video === trackOrKind) {
+
+      }
+    } else if (MediaStreamTrackType.Audio === trackOrKind.kind || MediaStreamTrackType.Video === trackOrKind.kind) {
+
+    }
+    // let tranceiver: RTCRtpTransceiver = new RTCRtpTransceiver(this.tranceiverArr.length);
+    // this.tranceiverArr.push(tranceiver);
+    // return tranceiver;
+    return tranceiver;
+  }
+
+  public getTransceivers(): RTCRtpTransceiver[] {
+    return this.tranceiverArr;
   }
 
   public createOffer(): Promise<RTCSessionDescriptionInit> {
@@ -71,15 +116,19 @@ export class RTCPeerConnection extends EventListener {
     return []; 
   }
 
-  public getSenders(): RTCRtpReceiver[] {
-    return [];
-  }
-
   public getStats(track: MediaStreamTrack): Promise<RTCStatsReport> {
     return new Promise((resolve, reject) => {
 
     })
-  } 
+  }
+
+  public getSenders(): RTCRtpSender[] {
+    let arr: RTCRtpSender[] = [];
+    for (let i = 0; i < this.tranceiverArr.length; ++i) {
+      arr = arr.concat(this.tranceiverArr[i].getSenders());
+    }
+    return arr;
+  }
 }
 
 class PeerconnectionMockData {

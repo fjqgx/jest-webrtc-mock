@@ -1,4 +1,12 @@
-class CSSStyleDeclaration {
+import { EventListener } from "../base/event-listener";
+
+export class CSSStyleDeclaration {
+
+  public width: string = '';
+
+  public height: string = '';
+
+  public oncontextmenu?: Function;
 
   protected css_text: string = '';
 
@@ -17,22 +25,18 @@ class CSSStyleDeclaration {
 
 }
 
-export class HTMLElement {
+export class HTMLElement extends EventListener {
 
-  protected cssStyle: CSSStyleDeclaration = new CSSStyleDeclaration();
+  public style: CSSStyleDeclaration = new CSSStyleDeclaration();
 
   protected parent?: HTMLElement;
 
   protected childArr: HTMLElement[] = [];
 
-  protected type: string = "";
+  protected elementType: string = '';
 
   constructor () {
-
-  }
-
-  get style(): CSSStyleDeclaration {
-    return this.cssStyle;
+    super();
   }
 
   set innerText(text: string) {
@@ -42,27 +46,12 @@ export class HTMLElement {
   get parentElement(): HTMLElement | undefined {
     return this.parent;
   }
+  
+  get tagName(): string {
+    return this.elementType;
+  }
 
   public appendChild(child: HTMLElement): void {
     this.childArr.push(child);
-  }
-
-  public addEventListener(event: string, callback: Function, capture?: boolean): void {
-
-  }
-
-  public removeEventListener(event: string, callback: Function, capture?: boolean): void {
-    
-  }
-
-  public querySelector(elementType: string): HTMLElement | undefined {
-    if (elementType === "canvas") {
-      for (let i = 0; i < this.childArr.length; ++i) {
-        if (this.childArr[i].type == "canvas") {
-          return this.childArr[i];
-        }
-      }
-    }
-    return undefined;
   }
 }
