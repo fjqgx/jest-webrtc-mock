@@ -14,10 +14,6 @@ export function mockRTCPeerConnectionData(type: RTCPeerConnectionMockDataType, d
 
 //////////////// AudioContext ////////////////
 
-export const enum MediaSourceMockDataType {
-  Codec = 1,
-} 
-
 export function mockAudioContext(): void;
 
 export function mockAudioContextClear(): void;
@@ -35,3 +31,10 @@ export function mockMediaSourceSupportedCodecs(types: string[]): void;
 export function mockWebAssembly(): void;
 
 export function mockWebAssemblyClear(): void; 
+
+
+
+//////////////// HTMLElement ////////////////
+export function mockHTMLCanvasElement(): void;
+
+export function mockHTMLCanvasElementClear(): void; 

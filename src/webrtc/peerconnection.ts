@@ -2,9 +2,11 @@ import { EventListener } from "../base/event-listener";
 import { RTCRtpReceiver } from "./rtpreceiver";
 import { RTCRtpSender } from "./rtpsender";
 import { RTCDataChannel } from "./datachannel";
-import { RTCPeerConnectionMockDataType } from "../../types";
 
-
+export const enum RTCPeerConnectionMockDataType {
+  Offer = 1,
+  Answer,
+}
 
 export class RTCPeerConnection extends EventListener {
 

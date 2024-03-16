@@ -1,6 +1,6 @@
 
-import { mockRTCPeerConnection, mockRTCPeerConnectionClear, mockRTCPeerConnectionData } from "../../src/webrtc/peerconnection";
-import { RTCPeerConnectionMockDataType } from "../../types";
+import { RTCPeerConnectionMockDataType, mockRTCPeerConnection, mockRTCPeerConnectionClear, mockRTCPeerConnectionData } from "../../src/webrtc/peerconnection";
+
 
 
 describe("test peerconnection", () => {

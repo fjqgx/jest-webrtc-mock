@@ -23,6 +23,10 @@ export class HTMLElement {
 
   protected parent?: HTMLElement;
 
+  protected childArr: HTMLElement[] = [];
+
+  protected type: string = "";
+
   constructor () {
 
   }
@@ -40,7 +44,7 @@ export class HTMLElement {
   }
 
   public appendChild(child: HTMLElement): void {
-
+    this.childArr.push(child);
   }
 
   public addEventListener(event: string, callback: Function, capture?: boolean): void {
@@ -49,5 +53,16 @@ export class HTMLElement {
 
   public removeEventListener(event: string, callback: Function, capture?: boolean): void {
     
+  }
+
+  public querySelector(elementType: string): HTMLElement | undefined {
+    if (elementType === "canvas") {
+      for (let i = 0; i < this.childArr.length; ++i) {
+        if (this.childArr[i].type == "canvas") {
+          return this.childArr[i];
+        }
+      }
+    }
+    return undefined;
   }
 }
