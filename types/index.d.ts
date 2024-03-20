@@ -68,6 +68,28 @@ export const enum AutoPlayType {
   PlayNotAllowed, // can not auto play
 }
 
+declare global {
+  interface HTMLVideoElement {
+    /** set autoplay policy */
+    setAutoPlayType(type: AutoPlayType): void;
+
+    setSupportRequestVideoFrameCallback (now: number, mediadata: MockVideoFrameCallbackMetadata, callback: ProcessVideoFrameCallbackMetadata): void;
+  }
+
+  interface RTCPeerConnection {
+    addStream(mediastream: MediaStream):void;
+  }
+
+  interface RTCRtpReceiver {
+    setProcessStatsDataCallback(report: RTCStatsReport, callback: ProcessStatsDataFunction): void;
+  }
+
+  interface RTCRtpSender {
+    setProcessStatsDataCallback(report: RTCStatsReport, callback: ProcessStatsDataFunction): void;
+  }
+}
+
+
 export interface MockVideoFrameCallbackMetadata extends VideoFrameCallbackMetadata {
   delay: number;    // next frame interval(ms)
 }

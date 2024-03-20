@@ -29,17 +29,9 @@ export class AudioContext {
 }
 
 export function mockAudioContext(): void {
-  Object.defineProperty(window, 'AudioContext', {
-    configurable: true,
-    writable: true,
-    value: AudioContext
-  })
+  (global as any).AudioContext = AudioContext;
 }
 
 export function mockAudioContextClear(): void {
-  Object.defineProperty(window, 'AudioContext', {
-    configurable: true,
-    writable: true,
-    value: undefined
-  })
+  delete (global as any).AudioContext;
 }

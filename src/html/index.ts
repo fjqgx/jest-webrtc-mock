@@ -28,17 +28,9 @@ function createElement (type: string): HTMLElement | null {
 
 
 export function mockHtmlElement(): void {
-  Object.defineProperty(document, 'createElement', {
-    configurable: true,
-    writable: true,
-    value: createElement
-  })
+  (document as any).createElement = createElement;
 }
 
 export function mockHtmlElementClear(): void {
-  Object.defineProperty(document, 'createElement', {
-    configurable: true,
-    writable: true,
-    value: undefined
-  })
+  delete (document as any).createElement
 }

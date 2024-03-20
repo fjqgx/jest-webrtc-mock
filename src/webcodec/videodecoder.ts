@@ -36,10 +36,10 @@ export class VideoDecoder {
 }
 
 export function mockVideoDecoder (supportDecoder: VideoDecoderConfig[]): void {
-  Object.defineProperty(window, "VideoDecoder", {
-    configurable: true,
-    writable: true,
-    value: VideoDecoder,
-  })
   VideoDecoder.supportVideoDeocderConfigArr = supportDecoder;
+  (global as any).VideoDecoder = VideoDecoder;
 } 
+
+export function mockVideoDecoderClear (supportDecoder: VideoDecoderConfig[]): void {
+  delete (global as any).VideoDecoder;
+}

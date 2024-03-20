@@ -182,12 +182,10 @@ let moc_data: PeerconnectionMockData = new PeerconnectionMockData();
  * mock支持RTCPeerConnection
  */
 export function mockRTCPeerConnection(): void {
-  (Window as any).RTCPeerConnection = RTCPeerConnection;
   (global as any).RTCPeerConnection = RTCPeerConnection;
 }
 
 export function mockRTCPeerConnectionClear(): void {
-  delete (Window as any).RTCPeerConnection;
   delete (global as any).RTCPeerConnection;
 }
 
