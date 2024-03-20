@@ -16,7 +16,6 @@ export class RtpChannelManager {
  
   public addStream(mediastream: MediaStream): void {
     if (this.mediastream !== undefined) {
-      console.error("RtpChannelManager mediastream is exist");
       return;
     }
     this.mediastream = mediastream;

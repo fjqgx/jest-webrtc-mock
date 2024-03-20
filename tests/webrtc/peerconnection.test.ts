@@ -55,4 +55,16 @@ describe("test peerconnection", () => {
       expect(true).toBe(false);
     }
   })
+
+  test ('mock rtcpeerconnection setRemoteDescription', () => {
+    let pc = new RTCPeerConnection();
+    pc.setRemoteDescription(new RTCSessionDescription({
+      type: 'offer',
+      sdp: "test sdp"
+    })).then(() => {
+      expect(0).toBe(0);
+    }).catch((err: Error) => {
+      expect(0).toBe(1);
+    })
+  })
 })

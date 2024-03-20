@@ -1,5 +1,8 @@
 # webrtc unit test utils
 
+## 1.1.0
+1. mockRTCPeerConnection会增加支持RTCSessionDescription
+
 ## 1.0.9
 1. 修复错误
 

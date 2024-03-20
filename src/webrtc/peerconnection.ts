@@ -6,6 +6,7 @@ import { RTCRtpTransceiver, TransceiverDirection } from "./rtptransceiver";
 import { MediaStream } from "../mediastram/mediastream";
 import { MediaStreamTrack } from "../mediastram/mediastreamtrack";
 import { MediaStreamTrackType } from "../mediastram/config";
+import { RTCSessionDescription } from "./config";
 
 
 export const enum RTCPeerConnectionMockDataType {
@@ -68,18 +69,18 @@ export class RTCPeerConnection extends EventListener {
     return this.tranceiverArr;
   }
 
-  public createOffer(): Promise<RTCSessionDescriptionInit> {
+  public createOffer(): Promise<RTCSessionDescription> {
     return new Promise((resolve, reject) => {
-      let offer: RTCSessionDescriptionInit | null = moc_data.getData(RTCPeerConnectionMockDataType.Offer);
+      let offer: RTCSessionDescription | null = moc_data.getData(RTCPeerConnectionMockDataType.Offer);
       if (offer) {
         resolve(offer)
       }
     })
   }
 
-  public createAnswer(): Promise<RTCSessionDescriptionInit> {
+  public createAnswer(): Promise<RTCSessionDescription> {
     return new Promise((resolve, reject) => {
-      let answer: RTCSessionDescriptionInit | null = moc_data.getData(RTCPeerConnectionMockDataType.Answer);
+      let answer: RTCSessionDescription | null = moc_data.getData(RTCPeerConnectionMockDataType.Answer);
       if (answer) {
         resolve(answer)
       }
@@ -133,12 +134,12 @@ export class RTCPeerConnection extends EventListener {
 
 class PeerconnectionMockData {
 
-  private rtc_offer: RTCSessionDescriptionInit = {
+  private rtc_offer: RTCSessionDescription = {
     type: "offer",
     sdp: "",
   }
   
-  private rtc_answer: RTCSessionDescriptionInit = {
+  private rtc_answer: RTCSessionDescription = {
     type: "answer",
     sdp: "",
   }
@@ -147,7 +148,7 @@ class PeerconnectionMockData {
 
   }
 
-  public mock (type: RTCPeerConnectionMockDataType, data: RTCSessionDescriptionInit): boolean {
+  public mock (type: RTCPeerConnectionMockDataType, data: RTCSessionDescription): boolean {
     if (type === RTCPeerConnectionMockDataType.Offer) {
       if (data.type === "offer" && data.sdp !== undefined && data.sdp.length > 0) {
         this.rtc_offer = data;
@@ -162,7 +163,7 @@ class PeerconnectionMockData {
     return false;
   }
 
-  public getData (type: RTCPeerConnectionMockDataType): RTCSessionDescriptionInit | null {
+  public getData (type: RTCPeerConnectionMockDataType): RTCSessionDescription | null {
     if (type === RTCPeerConnectionMockDataType.Offer) {
       return this.rtc_offer;
     } else if (type === RTCPeerConnectionMockDataType.Answer) {
@@ -183,12 +184,14 @@ let moc_data: PeerconnectionMockData = new PeerconnectionMockData();
  */
 export function mockRTCPeerConnection(): void {
   (global as any).RTCPeerConnection = RTCPeerConnection;
+  (global as any).RTCSessionDescription = RTCSessionDescription;
 }
 
 export function mockRTCPeerConnectionClear(): void {
   delete (global as any).RTCPeerConnection;
+  delete (global as any).RTCSessionDescription;
 }
 
-export function mockRTCPeerConnectionData(type: RTCPeerConnectionMockDataType, data: RTCSessionDescriptionInit): boolean {
+export function mockRTCPeerConnectionData(type: RTCPeerConnectionMockDataType, data: RTCSessionDescription): boolean {
   return moc_data.mock(type, data);
 }

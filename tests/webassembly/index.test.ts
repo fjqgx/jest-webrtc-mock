@@ -7,7 +7,6 @@ describe("test webassembly", () => {
   })
 
   test("test support webassembly", () => {
-    console.log("webassembly:", !!WebAssembly)
     expect(1).toBe(1)
   })
 })
